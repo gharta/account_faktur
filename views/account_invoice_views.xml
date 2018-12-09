@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Inheritance -->
+        <record model="ir.ui.view" id="invoice_form">
+            <field name="name">account.invoice.form</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_form"/>
+            <field name="arch" type="xml">
+            
+                <xpath expr="//button[@name='action_invoice_draft']" position="after">
+                    <button style="background:red" name="action_complete" string="Complete Invoice" 
+                        type="object" 
+                        attrs="{'invisible':[('state', '!=', 'paid')]}" 
+                        class="oe_highlight"/>
+                </xpath>
+
+                <xpath expr="//field[@name='date_due']" position="after">
+                    <field name="faktur_id" attrs="{'readonly':[('state', '!=', 'paid')]}" 
+                    domain="[('invoice_id', '=', False)]"/>
+                </xpath>
+                
+                <xpath expr="//field[@name='date_due']" position="attributes">
+                    <!-- <attribute name="invisible">1</attribute> -->
+                    <!-- <attribute name="groups">base.group_user</attribute> -->
+                    <attribute name="attrs">{'invisible':[('state', '=', 'paid')]}</attribute>
+                </xpath>
+
+                <xpath expr="//page[@name='other_info']//field[@name='name']" position="after">
+                </xpath>
+            </field>
+        </record>
+        
+    </data>
+</odoo>

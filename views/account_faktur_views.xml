@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record model="ir.actions.act_window" id="account_faktur_action">
+            <field name="name">Account Faktur</field>
+            <field name="res_model">account.faktur</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="account_faktur_menu" name="Account Faktur" sequence="200"/>
+        <menuitem id="sub_account_faktur_menu" parent="account_faktur_menu" name="Account Faktur" sequence="50" action="account_faktur_action" />
+        
+        <!-- Tree view for the menuitem -->
+        <record id="account_faktur_tree" model="ir.ui.view">
+            <field name="name">account.faktur.tree</field>
+            <field name="model">account.faktur</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="invoice_id"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+        
+        <!-- Form view for the menuitem -->
+        <record id="account_faktur_form" model="ir.ui.view">
+            <field name="name">account.faktur.form</field>
+            <field name="model">account.faktur</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <header>
+                            <!-- <button name="action_open_generate_faktur_wizard_by_xml" 
+                                string="Open Wizard by XML" type="object" class="oe_highlight" groups="base.group_user"/> -->
+                            <button name="action_open_wizard_simple" string="Generate" type="object" class="oe_highlight" groups="base.group_user"/>
+                            <field name="state" widget="statusbar" nolabel="1" statusbar_visible="available,taken"/>
+                        </header>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="invoice_id" readonly="1"/>
+                            </group>
+                            <group>
+                                <field name="invoice_number" readonly="1"/>
+                                <field name="partner_name" readonly="1"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</odoo>

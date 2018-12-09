@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- Wizard -->
+        <record id="account_faktur_wizard" model="ir.ui.view" >
+            <field name="name">account.faktur.wizard</field>
+            <field name="model">account.faktur.wizard</field>
+            <field name="arch" type="xml">
+                <form>
+                    <div style="white-space: pre-line;">
+                        <p><h5>Wizard untuk generate faktur pajak. </h5></p>
+                    </div>
+                    <group>
+                        <field name="kode_cabang"/>
+                        <field name="kode_tahun"/>
+                        <field name="nomor_seri_start"/>
+                        <field name="nomor_seri_end"/>
+                    </group>
+                    <footer>
+                        <button type="object" name="action_generate_account_faktur" string="Generate" class="oe_highlight"/>
+                        or
+                        <button string="Cancel" class="oe_link" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+
+        <!-- Act Window -->
+        <act_window
+            id="action_account_faktur_wizard"
+            name="Generate Faktur"
+            res_model="account.faktur.wizard"
+            src_model="account.faktur"
+            view_mode="form"
+            multi="True"
+            target="new"
+            key2="client_action_multi"
+        />
+    </data>
+</odoo>
